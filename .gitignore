@@ -1,2 +1,16 @@
+# IDEs
+# intelliJ
+.idea/
+*.iml
+
+#mvn
 target/
+
+#jmh
+jmh-result.*
+*.csv
+*.scsv
+*.json
+*.latex
+*.text
 
