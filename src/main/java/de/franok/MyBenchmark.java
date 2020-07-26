@@ -31,14 +31,25 @@
 
 package de.franok;
 
-import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
+
+import java.util.concurrent.TimeUnit;
 
 public class MyBenchmark {
 
     @Benchmark
-    public void testMethod() {
-        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
-        // Put your benchmark code here.
+    @BenchmarkMode(Mode.SingleShotTime)
+    @OutputTimeUnit(TimeUnit.NANOSECONDS)
+    @Measurement(iterations = 10)
+    @Fork(value = 3, warmups = 0)
+    public void testMethod(Blackhole blackhole) {
+        int[] array = {0,1,2,3,4};
+        int sum = 0;
+        for (int value : array) {
+            sum += value;
+        }
+        blackhole.consume(sum);
     }
 
 }
