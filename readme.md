@@ -20,7 +20,7 @@ Summary on the [java.util.Random](https://docs.oracle.com/en/java/javase/11/docs
 > An instance of this class is used to generate a stream of pseudorandom numbers. The class uses a 48-bit seed, which is modified using a linear congruential formula. (See Donald Knuth, The Art of Computer Programming, Volume 2, Section 3.2.1.)
 
 By invoking `nextInt(Integer.MAX_VALUE)` a number `randomInt` is generated, with a value between 0 (inclusive) and 2<sup>31</sup>-1 (exclusive).
-Depending on the modulo 2 of `randomInt` an object (either `EvenInteger` or `OddInteger`) is created and [consumed](https://javadoc.io/static/org.openjdk.jmh/jmh-core/1.23/org/openjdk/jmh/infra/Blackhole.html).
+Depending on the modulo 2 of `randomInt` an object (either `EvenInteger` or `OddInteger`) is created and added to a respective list (odd/even lists). Afterwards the lists are sorted by their object's value(int) property. Finally objects are consumed by a [Blackhole](https://javadoc.io/static/org.openjdk.jmh/jmh-core/1.23/org/openjdk/jmh/infra/Blackhole.html).
  
 
 ## run instructions

@@ -36,10 +36,16 @@ import de.franok.model.OddInteger;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class PseudoRandomBenchmark {
+
+    private static final int MAX_LOOP_ITERATIONS = 100;
+
 
     @Benchmark
     @BenchmarkMode(Mode.SingleShotTime)
@@ -48,19 +54,29 @@ public class PseudoRandomBenchmark {
     @Fork(value = 3, warmups = 0)
     public void processRandomIntegers(Blackhole blackhole) {
         Random random = new Random(42);
-        int maxIterations = 10;
-        for (int i = 0; i < maxIterations; i++) {
+        List<EvenInteger> evenIntegers = new ArrayList<>();
+        List<OddInteger> oddIntegers = new ArrayList<>();
+
+        for (int i = 0; i < MAX_LOOP_ITERATIONS; i++) {
             int currentRandomInt = random.nextInt(Integer.MAX_VALUE);
             if (currentRandomInt % 2 == 0) {
                 EvenInteger evenInt = new EvenInteger(currentRandomInt);
+                evenIntegers.add(evenInt);
                 blackhole.consume(evenInt);
-                //System.out.println(evenInt);
             } else {
                 OddInteger oddInt = new OddInteger(currentRandomInt);
+                oddIntegers.add(oddInt);
                 blackhole.consume(oddInt);
-                //System.out.println(oddInt);
             }
         }
+        evenIntegers.sort(Comparator.comparingInt(EvenInteger::getValue));
+        oddIntegers.sort(Comparator.comparingInt(OddInteger::getValue));
+        blackhole.consume(evenIntegers);
+        blackhole.consume(oddIntegers);
+        System.out.println("Number of generated EvenIntegers: " + evenIntegers.size());
+        System.out.println("Number of generated OddIntegers: " + oddIntegers.size());
+        //System.out.println(evenIntegers.stream().map(EvenInteger::getValue).collect(Collectors.toList()));
+        //System.out.println(oddIntegers.stream().map(OddInteger::getValue).collect(Collectors.toList()));
     }
 
 }
