@@ -31,25 +31,36 @@
 
 package de.franok;
 
+import de.franok.model.EvenInteger;
+import de.franok.model.OddInteger;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class MyBenchmark {
+public class PseudoRandomBenchmark {
 
     @Benchmark
     @BenchmarkMode(Mode.SingleShotTime)
     @OutputTimeUnit(TimeUnit.NANOSECONDS)
     @Measurement(iterations = 10)
     @Fork(value = 3, warmups = 0)
-    public void testMethod(Blackhole blackhole) {
-        int[] array = {0,1,2,3,4};
-        int sum = 0;
-        for (int value : array) {
-            sum += value;
+    public void processRandomIntegers(Blackhole blackhole) {
+        Random random = new Random(42);
+        int maxIterations = 10;
+        for (int i = 0; i < maxIterations; i++) {
+            int currentRandomInt = random.nextInt(Integer.MAX_VALUE);
+            if (currentRandomInt % 2 == 0) {
+                EvenInteger evenInt = new EvenInteger(currentRandomInt);
+                blackhole.consume(evenInt);
+                //System.out.println(evenInt);
+            } else {
+                OddInteger oddInt = new OddInteger(currentRandomInt);
+                blackhole.consume(oddInt);
+                //System.out.println(oddInt);
+            }
         }
-        blackhole.consume(sum);
     }
 
 }
