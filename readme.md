@@ -2,7 +2,7 @@
 
 ## setup description
 
-The benchmark was generated using following command:
+This benchmark project was generated following instructions from [offical JMH site](http://openjdk.java.net/projects/code-tools/jmh/):
 ```bash
 mvn archetype:generate \
           -DinteractiveMode=false \
@@ -29,6 +29,12 @@ Display JMH help:
 ```bash
 $ java -jar target/benchmarks.jar -h
 ```
+
+Running a certain benchmark by `[benchmark-name]`. The benchmark name is the prefix of the Java Class, i.e. `PseudoRandomBenchmark`, `PseudoRandomBench` or just `PseudoRandom`.
+```bash
+$ java -jar target/benchmarks.jar [benchmark-name]
+```
+
 
 Write results to a file (`-rf <type>`, `-rff <filename>`):
 ```bash
