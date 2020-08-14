@@ -44,16 +44,21 @@ import java.util.concurrent.TimeUnit;
 
 public class PseudoRandomBenchmark {
 
+    private static final int BENCHMARK_ITERATIONS = 25000;
+    private static final int BENCHMARK_FORKS = 3;
+    private static final int BENCHMARK_WARMUPS = 0;
+
     private static final int MAX_LOOP_ITERATIONS = 100;
 
+    private static final long SEED = 42;
 
     @Benchmark
     @BenchmarkMode(Mode.SingleShotTime)
     @OutputTimeUnit(TimeUnit.NANOSECONDS)
-    @Measurement(iterations = 10)
-    @Fork(value = 3, warmups = 0)
+    @Measurement(iterations = BENCHMARK_ITERATIONS)
+    @Fork(value = BENCHMARK_FORKS, warmups = BENCHMARK_WARMUPS)
     public void processRandomIntegers(Blackhole blackhole) {
-        Random random = new Random(42);
+        Random random = new Random(SEED);
         List<EvenInteger> evenIntegers = new ArrayList<>();
         List<OddInteger> oddIntegers = new ArrayList<>();
 
@@ -62,11 +67,11 @@ public class PseudoRandomBenchmark {
             if (currentRandomInt % 2 == 0) {
                 EvenInteger evenInt = new EvenInteger(currentRandomInt);
                 evenIntegers.add(evenInt);
-                blackhole.consume(evenInt);
+//                blackhole.consume(evenInt);
             } else {
                 OddInteger oddInt = new OddInteger(currentRandomInt);
                 oddIntegers.add(oddInt);
-                blackhole.consume(oddInt);
+//                blackhole.consume(oddInt);
             }
         }
         evenIntegers.sort(Comparator.comparingInt(EvenInteger::getValue));

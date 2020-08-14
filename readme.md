@@ -41,6 +41,18 @@ Write results to a file (`-rf <type>`, `-rff <filename>`):
 $ java -jar target/benchmarks.jar -rf json -rff jmh-result.json
 ```
 
+Run with JVM flags:
+```bash
+$ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -verbose:class -verbose:jni -verbose:gc -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+LogCompilation -XX:LogFile=jvm-warmup-hotspot.log -jar target/benchmarks.jar -rf json -rff jmh-result.json
+```
+
+## JVM flags
+
+https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html
+
+
+
+
 
 
 
