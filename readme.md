@@ -62,6 +62,11 @@ $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -j
 $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -verbose:class -verbose:jni -verbose:gc -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+LogCompilation -XX:LogFile=jvm-warmup-hotspot.log -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
 
+Copy-Paste-Template for benchmark execution:
+```bash
+$ java -Xms3g -Xmx4g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -XX:+PrintCompilation -jar target/benchmarks.jar Compression -rf json -rff jmh-result-specjvm2008-compression-compression.json | tee output-specjvm2008-compression.log
+```
+
 
 
 ## JVM flags
