@@ -23,6 +23,10 @@ Summary on the [java.util.Random](https://docs.oracle.com/en/java/javase/11/docs
 
 By invoking `nextInt(Integer.MAX_VALUE)` a number `randomInt` is generated, with a value between 0 (inclusive) and 2<sup>31</sup>-1 (exclusive).
 Depending on the modulo 2 of `randomInt` an object (either `EvenInteger` or `OddInteger`) is created and added to a respective list (odd/even lists). Afterwards the lists are sorted by their object's value(int) property. Finally objects are consumed by a [Blackhole](https://javadoc.io/static/org.openjdk.jmh/jmh-core/1.23/org/openjdk/jmh/infra/Blackhole.html).
+
+### SPECjvm2008 (remastered for JMH)
+
+
  
 
 ## run instructions
@@ -40,13 +44,25 @@ $ java -jar target/benchmarks.jar [benchmark-name]
 
 Write results to a file (`-rf <type>`, `-rff <filename>`):
 ```bash
-$ java -jar target/benchmarks.jar -rf json -rff jmh-result.json
+$ java -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
 
-Run with JVM flags:
+setting -Xms equal to -Xmx to avoid resizing hiccups, write heap_dump in case of java.lang.OutOfMemoryError:
 ```bash
-$ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -verbose:class -verbose:jni -verbose:gc -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+LogCompilation -XX:LogFile=jvm-warmup-hotspot.log -jar target/benchmarks.jar -rf json -rff jmh-result.json
+$ java  -Xms256m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
+
+Run with experimental/diagnostic JVM flags, e.g. use EpsilonGC (=disable GC, JDK11+):
+```bash
+$ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
+```
+
++ verbose settings (class, jni, gc, compilation, compilation-log):
+```bash
+$ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -verbose:class -verbose:jni -verbose:gc -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+LogCompilation -XX:LogFile=jvm-warmup-hotspot.log -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
+```
+
+
 
 ## JVM flags
 

@@ -16,3 +16,4 @@ jmh-result.*
 
 #jvm output
 *.log
+*.hprof

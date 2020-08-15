@@ -42,11 +42,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class PseudoRandomBenchmark {
+import static de.franok.Constants.*;
 
-    private static final int BENCHMARK_ITERATIONS = 25000;
-    private static final int BENCHMARK_FORKS = 3;
-    private static final int BENCHMARK_WARMUPS = 0;
+public class PseudoRandomBenchmark {
 
     private static final int MAX_LOOP_ITERATIONS = 100;
 
