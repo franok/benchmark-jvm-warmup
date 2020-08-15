@@ -79,6 +79,12 @@ $ tmux ls // list sessions
 $ tmux a -t [session-name] // re-attach to running session
 ```
 
+name output files with date suffix:
+```bash
+$ touch output-$(date +'%FT%T').log
+$ touch output-$(date +'%F-%H:%M').json
+```
+
 
 
 ## JVM flags
