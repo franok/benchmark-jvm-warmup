@@ -1,11 +1,11 @@
-package de.franok.model;
+package de.franok.pseudorandomnumbersorter.model;
 
-public class EvenInteger {
+public class OddInteger {
 
     private final int value;
 
-    public EvenInteger(int evenInt) {
-        this.value = evenInt;
+    public OddInteger(int oddInt) {
+        this.value = oddInt;
     }
 
     public int getValue() {
@@ -14,7 +14,7 @@ public class EvenInteger {
 
     @Override
     public String toString() {
-        return "EvenInteger{" +
+        return "OddInteger{" +
                 "value=" + value +
                 '}';
     }

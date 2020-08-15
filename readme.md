@@ -14,6 +14,8 @@ mvn archetype:generate \
 ```
 JMH version 1.23
 
+### PseudoRandomBenchmark
+
 The PseudoRandomBenchmark is a benchmark that creates an object of `java.util.Random` with a given seed (42), that is guaranteed to provide (pseudo-)random, but stable (reproducible) number sequences.
 
 Summary on the [java.util.Random](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Random.html) class (from official JDK11 docs):

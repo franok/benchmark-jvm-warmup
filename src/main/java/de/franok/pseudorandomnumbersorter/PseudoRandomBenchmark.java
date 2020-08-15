@@ -29,10 +29,10 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.franok;
+package de.franok.pseudorandomnumbersorter;
 
-import de.franok.model.EvenInteger;
-import de.franok.model.OddInteger;
+import de.franok.pseudorandomnumbersorter.model.EvenInteger;
+import de.franok.pseudorandomnumbersorter.model.OddInteger;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
