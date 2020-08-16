@@ -47,7 +47,13 @@ Write results to a file (`-rf <type>`, `-rff <filename>`):
 $ java -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
 
-setting -Xms equal to -Xmx to avoid resizing hiccups, write heap_dump in case of java.lang.OutOfMemoryError:
+Configure number of iterations, forks, warmups and timeout (`-i`, `-f`, `-wi`. `-to`):
+```bash
+$ java -jar target/benchmarks.jar [benchmark-name] -i 20000 -f 3 -wi 0 -to 5m
+```
+Note: benchmarks in this repository are defaulted to i=10, f=3, wi=0 (see `Constants.java`)
+
+Setting -Xms equal to -Xmx to avoid resizing hiccups, write heap_dump in case of java.lang.OutOfMemoryError:
 ```bash
 $ java  -Xms256m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
@@ -57,14 +63,14 @@ Run with experimental/diagnostic JVM flags, e.g. use EpsilonGC (=disable GC, JDK
 $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
 
-+ verbose settings (class, jni, gc, compilation, compilation-log):
+\+ verbose settings (class, jni, gc, compilation, compilation-log):
 ```bash
 $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -verbose:class -verbose:jni -verbose:gc -XX:+UnlockDiagnosticVMOptions -XX:+PrintCompilation -XX:+LogCompilation -XX:LogFile=jvm-warmup-hotspot.log -jar target/benchmarks.jar [benchmark-name] -rf json -rff jmh-result.json
 ```
 
 Copy-Paste-Template for benchmark execution:
 ```bash
-$ java -Xms3g -Xmx4g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -XX:+PrintCompilation -jar target/benchmarks.jar Compression -rf json -rff jmh-result-specjvm2008-compression-compression.json | tee output-specjvm2008-compression.log
+$ java -Xms3g -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -jar target/benchmarks.jar Compression -rf json -rff jmh-result-specjvm2008-compression.json -i 20000 -f 10 | tee output-specjvm2008-compression-$(date +'%FT%H\:%M').log
 ```
 
 Recommended to run in tmux!
@@ -82,7 +88,7 @@ $ tmux a -t [session-name] // re-attach to running session
 name output files with date suffix:
 ```bash
 $ touch output-$(date +'%FT%T').log
-$ touch output-$(date +'%F-%H:%M').json
+$ touch output-$(date +'%FT%H:%M').json
 ```
 
 
