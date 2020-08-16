@@ -70,7 +70,7 @@ $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -v
 
 Copy-Paste-Template for benchmark execution:
 ```bash
-$ java -Xms3g -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -jar target/benchmarks.jar Compression -rf json -rff jmh-result-specjvm2008-compression.json -i 20000 -f 10 | tee output-specjvm2008-compression-$(date +'%FT%H\:%M').log
+$ java -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar Compression -jvmArgs "-Xms3g -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch" -rf json -rff jmh-result-specjvm2008-compression.json -i 20000 -f 10 | tee output-specjvm2008-compression-$(date +'%FT%H:%M').log
 ```
 
 Recommended to run in tmux!
