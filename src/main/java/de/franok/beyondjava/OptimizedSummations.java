@@ -4,7 +4,7 @@
  * Blogpost is licensed under CC BY-NC-ND 3.0 DE (https://creativecommons.org/licenses/by-nc-nd/3.0/de/)
  */
 
-package de.franok.pseudorandomnumbersorter.beyondjava;
+package de.franok.beyondjava;
 
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
