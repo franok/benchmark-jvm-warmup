@@ -70,7 +70,7 @@ $ java -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch -v
 
 Copy-Paste-Template for benchmark execution:
 ```bash
-$ java -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar Compression -jvmArgs "-Xms3g -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch" -rf json -rff jmh-result-specjvm2008-compression.json -i 20000 -f 10 | tee output-specjvm2008-compression-$(date +'%FT%H:%M').log
+$ java -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar Compression -jvmArgs "-Xms3g -Xmx3g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch" -rf json -rff jmh-result-specjvm2008-compression.json -i 20000 -f 10 | tee output-specjvm2008-compression-$(date +'%FT%H-%M').log
 ```
 
 Recommended to run in tmux!
@@ -88,7 +88,7 @@ $ tmux a -t [session-name] // re-attach to running session
 name output files with date suffix:
 ```bash
 $ touch output-$(date +'%FT%T').log
-$ touch output-$(date +'%FT%H:%M').json
+$ touch output-$(date +'%FT%H-%M').json
 ```
 
 
