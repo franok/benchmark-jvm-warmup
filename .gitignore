@@ -17,3 +17,4 @@ jmh-result.*
 #jvm output
 *.log
 *.hprof
+openj9AOT/
