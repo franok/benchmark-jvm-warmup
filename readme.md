@@ -26,8 +26,20 @@ Depending on the modulo 2 of `randomInt` an object (either `EvenInteger` or `Odd
 
 ### SPECjvm2008 (remastered for JMH)
 
+[/benchmark-jvm-warmup/tree/master/src/main/java/de/franok/specjvm2008](/src/main/java/de/franok/specjvm2008)
 
- 
+### BacktrackingSudokuSolver benchmark
+
+[/benchmark-jvm-warmup/tree/master/src/main/java/de/franok/baeldung/BacktrackingSudokuSolver.java](/src/main/java/de/franok/baeldung/BacktrackingSudokuSolver.java)
+
+run with:
+```bash
+java11-hotspot -XX:+HeapDumpOnOutOfMemoryError -jar target/benchmarks.jar Backtracking -jvmArgs "-Xms5g -Xmx5g -XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC -XX:+AlwaysPreTouch" -rf json -rff jmh-result-hotspot-backtracking-sudoku.json -i 21000 -f 20 -to 360m | tee output-hotspot-backtracking-sudoku-$(date +'%FT%H-%M').log
+```
+
+benchmark results for HotSpot VM, GraalVM and OpenJ9: https://github.com/franok/benchmark-results-jvm-warmup
+
+
 
 ## run instructions
 
